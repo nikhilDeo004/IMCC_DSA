@@ -19,6 +19,7 @@ class BST:
                 if new_node.data < temp.data:
                     if temp.left is None:
                         temp.left = new_node
+                        return
                     else:
                         temp = temp.left
                 elif new_node.data >= temp.data:
@@ -28,14 +29,13 @@ class BST:
                     else:
                         temp = temp.right
 
-
-def inorder(self):
-    if self.root is None:
-        return
-    else:
-        inorder(self.left)
-        print(self.data, end=" ")
-        inorder(self.right)
+    def inorder(self, temp):
+        if temp is None:
+            return
+        else:
+            self.inorder(temp.left)
+            print(temp.data, end=" ")
+            self.inorder(temp.right)
 
 
 btree = BST()
@@ -45,3 +45,5 @@ btree.insert(Node(30))
 btree.insert(Node(40))
 btree.insert(Node(50))
 btree.insert(Node(60))
+
+btree.inorder(btree.root)
