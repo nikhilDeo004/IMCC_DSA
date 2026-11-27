@@ -10,51 +10,73 @@ class BST:
 
     def insert(self,data):
         new_node=Node(data)
-        if self.root==None:
+
+        if self.root is None:
             self.root=new_node
-        else:
-            temp=self.root
+            return
 
-            while True:
-                if new_node.data<temp.data:
-                    if temp.left==None:
-                        temp.left==new_node
-                        return
-                    else:
-                        temp=temp.left
+        temp=self.root
+        while temp:
+            if data < temp.data:
+                if temp.left is None:
+                    temp.left = new_node
+                    return
                 else:
-                    if temp.right==None:
-                        temp.right==new_node
-                        return
-                    else:
-                        temp=temp.right
+                    temp = temp.left
+            if data > temp.data:
+                if temp.right is None:
+                    temp.right=new_node
+                    return
+                else:
+                    temp=temp.right
 
-    def preorder(self,root):
-        if root == None:
-            return
-        else:
-            print(root.data,end=" ")
-            self.preorder(root.left)
-            self.preorder(root.right)
+    def search(self,data):
+        if self.root is None:
+            print("Tree is empty")
+        temp=self.root
+        while temp:
+            if data == temp.data:
+                print(data," is present")
+                return
+            elif data < temp.data:
+                temp=temp.left
+            else:
+                temp=temp.right
 
-    def postorder(self,root):
-        if root == None:
-            return
-        else:
-            self.postorder(root.left)
-            self.postorder(root.right)
-            print(root.data,end=" ")
+        print(data," not found")
 
-    def inorder(self,root):
-        if root == None:
+    def minimum(self):
+        if self.root is None:
+            print("No tree exists")
+        temp=self.root
+        while temp.left:
+            temp=temp.left
+        print(temp)
+
+    def maximum(self):
+        if self.root is None:
+            print("No tree")
+        temp=self.root
+        while temp.right:
+            temp=temp.right
+        print(temp)
+
+    def height(self):
+        if self.root is None:
+            print("No tree")
             return
-        else:
-            self.inorder(root.left)
-            print(root.data,end=" ")
-            self.inorder(root.right)
+        temp=self.root
+        return 1+max(self.height(temp.left),self.height(temp.right))
+
+    def count_leaves(self):
+        if self.root is None:
+            print("No tree")
+            return
+        temp=self.root
+        return 1-(self.count_leaves(temp.left))+(self.count_leaves(temp.right))
             
-                        
 
 
+            
 
     
